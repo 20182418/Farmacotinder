@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Grupos Farmacológicos - FarmacoTinder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Roboto, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: rgba(102, 224, 229, 1); /* El turquesa de tu imagen */
+      position: relative;
+      padding: 40px 20px;
+    }
+
+    /* Logo de fondo sutil */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('Logo_ayudantia.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 500px;
+      opacity: 0.15;
+      z-index: -1;
+    }
+
+    /* Contenedor de la cuadrícula */
+    .grid-container {
+        display: grid;
+        /* Forzamos 4 columnas iguales siempre */
+        grid-template-columns: repeat(4, 1fr); 
+        gap: 20px;
+        width: 100%;
+        max-width: 1000px;
+        margin-top: 20px;
+    }
+    /* Estilo para el enlace (el nuevo contenedor del botón) */
+    .grid-container a {
+        text-decoration: none;
+        display: block; /* Para que ocupe todo el espacio de la celda */
+        width: 100%;
+    }
+    /* Estilo de las tarjetas amarillas (según tu imagen) */
+    .card-btn {
+      background: #ffd666; /* Amarillo de la imagen */
+      border: none;
+      border-radius: 25px; /* Bordes muy redondeados */
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      color: #333;
+      text-align: center;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.2s, background 0.2s;
+
+      width: 100%;
+      height: 90px;
+      padding: 10px 15px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card-btn:hover {
+        transform: translateY(-5px);
+        background: #ffcc33;
+    }
+
+    /* Botón Volver */
+    .btn-back {
+      margin-bottom: 30px;
+      background: #333;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+    }
+
+    .btn-back:hover {
+      background: #000;
+      transform: scale(1.05);
+    }
+
+    /* Responsive: en móviles muy pequeños 2 columnas */
+    @media (max-width: 768px) {
+        .grid-container {
+            grid-template-columns: repeat(2, 1fr); /* 2 columnas en móvil */
+            gap: 15px;
+        }
+        .card-btn {
+            font-size: 11px;
+            height: 70px;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="index2.html" class="btn-back">← VOLVER AL MENÚ</a>
+
+  <div class="grid-container">
+    <a href="juego.html?categoria=betabloqueadores" style="text-decoration: none;">
+        <button class="card-btn">Betabloqueadores</button>
+    </a>
+    <a href="juego.html?categoria=moduladoresraa" style="text-decoration: none;">
+        <button class="card-btn">Moduladores del sistema RAA</button>
+    </a>
+    <a href="juego.html?categoria=diureticos" style="text-decoration: none;">
+        <button class="card-btn">Diuréticos</button>
+    </a>
+    <a href="juego.html?categoria=ieca" style="text-decoration: none;">
+        <button class="card-btn">IECA</button>
+    </a>
+    <a href="juego.html?categoria=calcioantagonistas" style="text-decoration: none;">
+        <button class="card-btn">Calcioantagonistas</button>
+    </a>
+    
+    <a href="juego.html?categoria=anticoagulantes" style="text-decoration: none;">
+        <button class="card-btn">Anticoagulantes y Antiagregantes</button>
+    </a>
+    <a href="juego.html?categoria=hipolipemiantes" style="text-decoration: none;">
+        <button class="card-btn">Hipolipemiantes</button>
+    </a>
+    <a href="juego.html?categoria=aines" style="text-decoration: none;">
+        <button class="card-btn">AINES</button>
+    </a>
+    <a href="juego.html?categoria=ansioliticos" style="text-decoration: none;">
+        <button class="card-btn">Ansiolíticos</button>
+    </a>
+    <a href="juego.html?categoria=antiparkinsonianos" style="text-decoration: none;">
+        <button class="card-btn">Antiparkinsonianos</button>
+    </a>
+    
+    <a href="juego.html?categoria=antiepilepticos" style="text-decoration: none;">
+        <button class="card-btn">Antiepilépticos</button>
+    </a>
+    <a href="juego.html?categoria=antidepresivos" style="text-decoration: none;">
+        <button class="card-btn">Antidepresivos</button>
+    </a>
+    <a href="juego.html?categoria=hipoglicemiantes" style="text-decoration: none;">
+        <button class="card-btn">Hipoglicemiantes</button>
+    </a>
+    <a href="juego.html?categoria=corticoides" style="text-decoration: none;">
+        <button class="card-btn">Corticoides</button>
+    </a>
+    <a href="juego.html?categoria=antibioticos" style="text-decoration: none;">
+        <button class="card-btn">Antibióticos</button>
+    </a>
+
+    <a href="juego.html?categoria=tiroideos" style="text-decoration: none;">
+        <button class="card-btn">Tiroideos</button>
+    </a>
+    <a href="juego.html?categoria=corticoides" style="text-decoration: none;">
+        <button class="card-btn">Corticoides</button>
+    </a>
+    <a href="juego.html?categoria=antivirales" style="text-decoration: none;">
+        <button class="card-btn">Antivirales</button>
+    </a>
+    <a href="juego.html?categoria=antiparasitarios" style="text-decoration: none;">
+        <button class="card-btn">Antiparasitarios</button>
+    </a>
+    <a href="juego.html?categoria=antifungico" style="text-decoration: none;">
+        <button class="card-btn">Antifungico</button>
+    </a>
+  </div>
+
+</body>
+</html>

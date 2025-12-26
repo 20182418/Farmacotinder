@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caso Clínico - FarmacoTinder</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ... (Aquí pegas el CSS que diseñamos para la tarjeta de Rocío) ... */
+    body {
+      margin: 0; 
+      min-height: 100vh; 
+      display: flex; 
+      flex-direction: column; /* LOS ELEMENTOS SE APILAN VERTICALMENTE */
+      justify-content: center; 
+      align-items: center;
+      background-color: #66e0e5; 
+      font-family: 'Segoe UI', sans-serif;
+      gap: 20px; /* ESPACIO AUTOMÁTICO ENTRE TARJETA Y BOTÓN */
+      padding: 20px;
+    }
+    /* Logo de fondo sutil */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image: url('Logo_ayudantia.png');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 550px;
+      opacity: 0.15;
+      z-index: -1;
+    }
+    .card-perfil {
+        width: 100%;
+        height: 500px;
+        background: white;
+        border-radius: 30px;
+        padding: 0px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        overflow: hidden;
+        margin: 0 auto;
+    }
+
+    .card-perfil img {
+        width: 180px;
+        height: 180px;
+        object-fit: contain;
+    }
+    .info-fármaco{
+        padding: 20px;
+        text-align: center;
+    }
+    .info-fármaco h2{
+        font-family: 'Monserrat',sans-serif;
+        font-weight: 900;
+        margin: 0 0 10px 0;
+        color: #333;
+    }
+    .img-contenedor{
+        width: 100%;
+        background:#f8f9fa ;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .bio-fármaco {
+        text-align: justify;
+        font-size: 14px;
+        line-height: 1.4;
+        color: #555;
+        background: #f0f7f8;
+        padding: 15px;
+        border-radius: 15px;
+    }
+    .btn-back {
+      /* Quitamos el margin-bottom para que no empuje hacia arriba innecesariamente */
+      background: #333;
+      color: white;
+      padding: 12px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 14px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      transition: 0.3s;
+      margin-top: 10px; /* Refuerzo de separación */
+    }
+
+    .btn-back:hover {
+      background: #000;
+      transform: scale(1.05);
+    }
+    .main-card { background: #eef9fb; border-radius: 40px; padding: 30px; width: 450px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .speech-bubble { font-family: 'Monserrat',sans-serif;font-weight: 600; background: white; border-radius: 20px; padding: 15px; margin: 20px 0; font-size: 16px; text-align: justify; }
+    .btn-farmacotinder { background: #ff5b5b; color: white; border: none; padding: 15px 30px; border-radius: 50px; font-weight: 900; cursor: pointer; }
+  </style>
+</head>
+<body>
+  
+  <div id="pantalla-caso" class="main-card">
+    <div id="titulo-caso" style="font-weight: 900; margin-bottom: 10px;">CASO CLÍNICO</div>
+    
+    <div class="speech-bubble">
+      <p id="texto-descripcion"></p>
+    </div>
+
+    <p><strong>¿A quién debería escoger para que la acompañe AHORA?</strong></p>
+
+    <button class="btn-farmacotinder" onclick="irAMatch()">🔥 FARMACOTINDER</button>
+  </div>
+  <div id="pantalla-tinder" class="main-card" style="display: none; position: relative; min-width: 500px;">
+    <div id="contenedor-tarjetas">
+        </div>
+    
+    <div style="display: flex; justify-content: space-around; width: 100%; position: relative; bottom: 5px; left: 0;">
+        <button onclick="decidir(false)" style="background:#ff4b2b; border:none; border-radius:50%; width:60px; height:60px; color:white; font-size:30px; cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">✘</button>
+        <button onclick="decidir(true)" style="background:#2ecc71; border:none; border-radius:50%; width:60px; height:60px; color:white; font-size:30px; cursor:pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">❤</button>
+    </div>
+  </div>
+  <a href="grupo_farmacologico.html" class="btn-back">← VOLVER A LOS GRUPOS FARMACOLÓGICOS</a>
+  <script>
+    // 1. La Base de Datos
+    const baseDeDatos = {
+        "ansioliticos": {
+            descripcion: "Roció de 28 años, estudiante universitaria, con insomnio, ansiedad  y crisis de pánico ocasionales. Está “mentalmente agotada” con palpitaciones nocturnas y dificultad para relajarse. Busca en Farmacotinder a alguien que la pueda acompañar, pero no quiere perder el control; ya que está cerca a rendir una prueba.",
+            perfiles: [
+                { 
+                    nombre: "ValeriaPam (Diazepam)", 
+                    bio: "🗒️Soy tranquila y confiable. Me gusta quedarme contigo bastante tiempo y darte paz profunda. (Potenciador GABA)", 
+                    atributos:"🌟Me quedo contigo por horas, no te dejo sola tan rápido y te puedo acompañar en tus momentos de crisis",
+                    redflag:"🚩No soy buena acompañante si tienes que rendir al 100% al día siguiente",
+                    foto: "Diazepam.png",
+                    esCorrecto: false 
+                },
+                { 
+                    nombre: "Lore alpra (Alprazolam)", 
+                    bio: "🗒️No me gustan los rodeos. Si estás mal, voy directo al punto para hablar lo que te causa tu malestar",
+                    atributos:"🌟Estaré contigo de manera rápida cuando te sientas muy ansioso",
+                    redflag:"🚩Si te juntas mucho conmigo, luego no te vas a poder separar de mi muy fácil",
+                    foto: "diazepam.png",
+                    esCorrecto: false 
+                },
+                {
+                    nombre:"Clara Lora (Lorazepam)",
+                    bio:"🗒️Me gusta el control, la estabilidad y las decisiones pensadas. (Ansiolítico equilibrado)",
+                    atributos:" Soy una excelente compañera cuando sientas que tu ansiedad es sostenida",
+                    redflag:"Si buscas algo 'fulminante',quizá no soy tu tipo; ya que no soy la más intensa ",
+                    foto:"diazepam.png",
+                    esCorrecto:true
+                }
+            ]
+        }
+    };
+
+    // 2. Lógica para detectar la categoría
+    const params = new URLSearchParams(window.location.search);
+    const cat = params.get('categoria');
+
+    if (baseDeDatos[cat]) {
+      document.getElementById('texto-descripcion').innerText = baseDeDatos[cat].descripcion;
+    } else {
+      document.getElementById('texto-descripcion').innerText = "Caso no encontrado.";
+    }
+
+    let indiceActual = 0;
+    let perfilesActuales = [];
+
+    function irAMatch() {
+        document.getElementById('pantalla-caso').style.display = 'none';
+        document.getElementById('pantalla-tinder').style.display = 'block';
+    
+        perfilesActuales = baseDeDatos[cat].perfiles;
+        mostrarPerfil();
+    }
+
+    function mostrarPerfil() {
+        const contenedor = document.getElementById('contenedor-tarjetas');
+        if (indiceActual >= perfilesActuales.length) {
+            contenedor.innerHTML = "<h2>¡No hay más candidatos!</h2><p>Revisa tus resultados.</p>";
+            return;
+        }
+
+        const p = perfilesActuales[indiceActual];
+        contenedor.innerHTML = `
+            <div class="card-perfil" id="tarjeta">
+                <div class="img-contenedor">
+                    <img src="${p.foto}" alt="${p.nombre}">
+                </div>
+                <div class="info-fármaco">
+                    <h2>${p.nombre}</h2>
+                    <div class="bio-fármaco">
+                        <p>${p.bio}</p>
+                        <p>${p.atributos}</p>
+                        <p>${p.redflag}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    function decidir(acepta) {
+        const tarjeta = document.getElementById('tarjeta');
+        const esCorrecto = perfilesActuales[indiceActual].esCorrecto;
+
+        if (acepta) {
+            tarjeta.style.transform = "translateX(200px) rotate(20deg)";
+            tarjeta.style.opacity = "0";
+            if (esCorrecto) alert("¡Match Perfecto! Es la mejor opción para Rocío.");
+            else alert("Ufff... Rocío se durmió en el examen. No era el indicado.");
+        } else {
+            tarjeta.style.transform = "translateX(-200px) rotate(-20deg)";
+            tarjeta.style.opacity = "0";
+        }
+
+        setTimeout(() => {
+            indiceActual++;
+            mostrarPerfil();
+        }, 500);
+    }
+  </script>
+</body>
+</html>

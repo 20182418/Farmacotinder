@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>FarmacoTinder</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Jersey 10:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: "Segoe UI", Roboto, sans-serif;
+    }
+
+   body {
+     margin: 0;
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     overflow: hidden;
+  
+     /* COLOR DE FONDO (Siempre ocupará el 100%) */
+     background-color: rgba(102, 224, 229, 0.85); 
+     position: relative; /* Necesario para posicionar el logo detrás */
+    }
+
+   /* CAPA PARA EL LOGO */
+   body::before {
+     content: "";
+     position: absolute;
+     top: 0; 
+     left: 0;
+     width: 100%;
+     height: 100%;
+  
+     /* CONFIGURACIÓN DE LA IMAGEN */
+     background-image: url('Logo_ayudantia.png');
+     background-repeat: no-repeat;
+     background-position: center;
+  
+     /* AQUÍ CAMBIAS EL TAMAÑO: Ejemplo 200px o 50% */
+     background-size: 450px; 
+  
+     /* Opacidad opcional si quieres que el logo se vea más suave */
+     opacity: 0.1; 
+  
+     z-index: -1; /* Lo manda al fondo, detrás del contenido */
+    }
+
+    /* SPLASH SCREEN */
+    .splash {
+      position: absolute;
+      text-align: center;
+      z-index: 10;
+      animation: fadeOut 0.8s ease forwards;
+      animation-delay: 2.5s;
+    }
+
+    .splash h1 {
+      font-size: 34px;
+      margin-bottom: 20px;
+      color: #1a1a1a;
+      animation: slideDown 1.2s ease forwards;
+    }
+
+    .splash img {
+      width: 240px;
+      filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+      animation: fadeIn 1.5s ease forwards;
+      animation-delay: 0.6s;
+    }
+
+    /* MAIN MENU */
+    .menu {
+      display: none; /* Se activa vía JS */
+      width: 100%;
+      max-width: 600px;
+      padding: 20px;
+      text-align: center;
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .menu h2 {
+      /*Aplicamos la fuente importada*/
+      font-family: 'Jersey 10', sans-serif;
+
+      font-size: 60px;
+      margin-bottom: 40px;
+      font-weight: 800;
+      color: #000000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .buttons {
+      display: flex;
+      flex-direction: column; /* Apilados por defecto para móvil */
+      gap: 20px;
+      align-items: center;
+    }
+
+    .btn {
+      background: #ffe066;
+      border: none;
+      padding: 20px 30px;
+      border-radius: 15px;
+      font-weight: bold;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+      box-shadow: 0 4px 0px #d9bc4c; /* Efecto 3D simple */
+      transition: all 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      background: #ffd43b;
+      box-shadow: 0 6px 0px #d9bc4c;
+    }
+
+    .btn:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0px #d9bc4c;
+    }
+
+    /* Media Query para pantallas más grandes */
+    @media (min-width: 600px) {
+      .buttons {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+    }
+
+    /* ANIMACIONES */
+    @keyframes slideDown {
+      from { transform: translateY(-30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="splash" id="splash">
+    <h1>Bienvenido a FarmacoTinder</h1>
+    <img src="tu-imagen-aqui.png" alt="Logo FarmacoTinder">
+  </div>
+
+  <div class="menu" id="menu">
+    <h2>Selecciona una categoría</h2>
+    <div class="buttons">
+      <button class="btn" onclick="selectMode('farmaco')">GRUPO FARMACOLÓGICO</button>
+      <button class="btn" onclick="selectMode('clinica')">ESPECIALIDAD CLÍNICA</button>
+      <button class="btn" onclick="selectMode('mixto')">MODO MIXTO</button>
+    </div>
+  </div>
+
+  <script>
+    // Mostrar el menú justo cuando el splash termina de desvanecerse
+    setTimeout(() => {
+      const menu = document.getElementById('menu');
+      menu.style.display = 'block';
+      
+      // Removemos el splash del DOM para limpiar
+      document.getElementById('splash').remove();
+    }, 3200);
+
+    // Función para manejar la selección
+    function selectMode(mode) {
+      console.log("Modo seleccionado:", mode);
+      // Aquí podrías redirigir a otra página:
+      if (mode === 'farmaco') {
+        window.location.href = "grupo_farmacologico.html";
+      } else if (mode === 'clinica') {
+        window.location.href = "especialidad_clinica.html";
+      } else if (mode === 'mixto') {
+         window.location.href = "modo_mixto.html";
+    }
+      // window.location.href = `juego.html?mode=${mode}`;
+    }
+  </script>
+
+</body>
+</html>
