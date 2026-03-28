@@ -200,7 +200,7 @@
     let indiceActual = 0;
     let perfilesActuales = casoActual.perfiles;
     
-    windows.onload=function(){
+    window.onload=function(){
         if(casoActual){
             document.getElementById('texto-descripcion').innerText = casoActual.descripcion;
             document.getElementById('titulo-caso').innerText = `CASO CLÍNICO: ${casoActual.categoria}`;
